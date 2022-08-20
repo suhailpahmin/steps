@@ -1,9 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../../store';
 
+const enum Gender {
+  MALE,
+  FEMALE,
+}
 interface UserState {
   firstTime: boolean;
-  gender: string;
+  gender: Gender;
   yearBorn: number;
   weight: number;
   height: number;
@@ -11,7 +15,7 @@ interface UserState {
 
 const initialState: UserState = {
   firstTime: true,
-  gender: 'Male',
+  gender: Gender.MALE,
   yearBorn: 0,
   weight: 0,
   height: 0,
