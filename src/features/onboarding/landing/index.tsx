@@ -7,6 +7,7 @@ import {useViewportUnits} from '@hooks';
 
 import styles from './landing.styles';
 import {useNavigation} from '@react-navigation/native';
+import {onboardingLanding} from '../../../components/configs';
 
 const LandingScreen = () => {
   const navigation = useNavigation();
@@ -21,17 +22,17 @@ const LandingScreen = () => {
       <Container style={styles(vh).container}>
         <Image style={styles(vh).appLogo} source={Images.appIcon} />
         <Text bold size={TextSize.MD}>
-          STEPS
+          {onboardingLanding.appTitle}
         </Text>
         <View style={styles(vh).headlineContainer}>
-          <Text size={TextSize.SM}>Track Your Steps</Text>
+          <Text size={TextSize.SM}>{onboardingLanding.headline}</Text>
           <Text bold size={TextSize.MD}>
-            at Your Fingertip
+            {onboardingLanding.subHeadline}
           </Text>
           <Button
             type={ButtonType.PRIMARY}
             style={styles(vh, vw).button}
-            label={'Get Started'}
+            label={onboardingLanding.buttonLabel}
             onPress={_navigateToOnboarding}
           />
         </View>

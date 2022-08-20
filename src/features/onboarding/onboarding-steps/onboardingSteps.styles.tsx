@@ -20,6 +20,8 @@ const styles = (vh: number) =>
       marginTop: 14,
 
       fontSize: 12,
+      fontWeight: '600',
+      lineHeight: 16,
     },
     wrapper: {
       flex: 1,
