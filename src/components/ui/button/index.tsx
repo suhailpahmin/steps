@@ -17,7 +17,9 @@ export const Button: FC<IButtonProps> = props => {
           ? styles.disabled
           : props.type === Type.PRIMARY
           ? styles.primary
-          : styles.secondary,
+          : props.type === Type.SECONDARY
+          ? styles.secondary
+          : styles.tertiary,
       ]}>
       <Text style={styles.text}>{props.label}</Text>
     </Pressable>
@@ -26,13 +28,17 @@ export const Button: FC<IButtonProps> = props => {
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: 24,
+    borderRadius: 36,
   },
   primary: {
     backgroundColor: colors.primary,
   },
   secondary: {
     backgroundColor: colors.secondary,
+  },
+  tertiary: {
+    borderColor: colors.accent,
+    borderWidth: 2,
   },
   disabled: {
     backgroundColor: colors.accent,
@@ -41,8 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
 
-    paddingHorizontal: 16,
-    paddingVertical: 24,
+    paddingVertical: 16,
     color: colors.text,
     textAlign: 'center',
   },

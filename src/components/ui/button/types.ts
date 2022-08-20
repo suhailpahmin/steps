@@ -3,6 +3,7 @@ import {GestureResponderEvent, StyleProp, ViewStyle} from 'react-native';
 export enum Type {
   PRIMARY,
   SECONDARY,
+  TERTIARY,
 }
 
 export interface IButtonProps {

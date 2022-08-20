@@ -1,60 +1,35 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
  * @format
  */
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  View,
-  useColorScheme,
-  StyleSheet,
-} from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Button} from './src/components/ui/button/button';
-import {Type as ButtonType} from './src/components/ui/button/types';
+import LandingScreen from './src/features/onboarding/landing';
+import OnboardingSteps from './src/features/onboarding/onboarding-steps';
+import HomeScreen from './src/features/home/home';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+  const firstTime = true;
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Button
-            type={ButtonType.PRIMARY}
-            style={styles.button}
-            onPress={() => console.log('Button Pressed')}
-            label="Primary"
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        {firstTime ? (
+          <Stack.Group screenOptions={{headerShown: false}}>
+            <Stack.Screen name="Onboarding" component={LandingScreen} />
+            <Stack.Screen name="OnboardingSteps" component={OnboardingSteps} />
+          </Stack.Group>
+        ) : (
+          <Stack.Group>
+            <Stack.Screen name="Home" component={HomeScreen} />
+          </Stack.Group>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    margin: 24,
-  },
-});
 
 export default App;
