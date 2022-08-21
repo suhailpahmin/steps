@@ -1,17 +1,24 @@
 import AppleHealthKit, {
-  HealthValue,
   HealthInputOptions,
+  HealthValue,
 } from 'react-native-health';
 
 import {appleHealthKitOptions} from '../../../components/configs/permissions';
 
-export const useHKStepCount = () => {
+export const initHKStepCount = () => {
+  var response = {
+    allowed: false,
+    steps: 0,
+    error: '',
+  };
+
   AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
     if (error) {
-      console.log('[ERROR] Cannot grant permission');
+      response.allowed = false;
     }
 
     // HealthKit Initialized. Can now read and write
+    response.allowed = true;
     const options: HealthInputOptions = {
       date: new Date().toISOString(),
       includeManuallyAdded: false,
@@ -21,32 +28,32 @@ export const useHKStepCount = () => {
       options,
       (err: Object, results: HealthValue) => {
         if (err) {
-          return;
+          //@ts-ignore
+          error = err.message;
         }
-        console.log('Step Count Results', results);
-        return results;
+        response.steps = results.value;
       },
     );
   });
 };
 
-export const useHKTotalSteps = () => {
+export const initHKTotalSteps = () => {
   AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
     if (error) {
       console.log('[ERROR] Cannot grant permission');
     }
 
     const todayDate = new Date();
-    const first = todayDate.getDate() - todayDate.getDay();
+    const first = todayDate.getDate() - (todayDate.getDay() + 6);
     const last = first + 6;
 
-    const firstDate = new Date(todayDate.setDate(first)).toISOString();
-    const lastDate = new Date(todayDate.setDate(last)).toISOString();
+    const firstDate = new Date(todayDate.setDate(first)).toISOString(); // Monday
+    const lastDate = new Date(todayDate.setDate(last)).toISOString(); // Sunday
 
     // HealthKit Initialized. Can now read and write
     const options: HealthInputOptions = {
-      startDate: firstDate, // required
-      endDate: lastDate, // optional; default now
+      startDate: firstDate,
+      endDate: lastDate,
     };
 
     AppleHealthKit.getDailyStepCountSamples(

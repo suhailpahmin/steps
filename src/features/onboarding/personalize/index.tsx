@@ -19,7 +19,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import styles from './personalize.styles';
 
-import {cwPersonalization} from '../../../components/configs/copywriting';
+import {cwPersonalization} from '../../../components/configs';
 import {colors} from '../../../components/configs/colors';
 import {
   cwButtons,
@@ -82,7 +82,7 @@ const PersonalizationScreen = () => {
     setButtonEnabled(true);
   };
 
-  const _navigateToSetGoals = () => {
+  const _navigateToPermissions = () => {
     const userState = {
       firstTime: true,
       gender: gender,
@@ -187,7 +187,7 @@ const PersonalizationScreen = () => {
             style={styles(vh).button}
             type={ButtonType.PRIMARY}
             label={cwButtons.next}
-            onPress={_navigateToSetGoals}
+            onPress={_navigateToPermissions}
             disabled={!buttonEnabled}
           />
         </Container>

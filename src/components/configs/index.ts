@@ -5,6 +5,7 @@ export const MinYear = '1900';
 // Buttons
 export const cwButtons = {
   next: 'Next',
+  allow: 'Allow',
 };
 
 // HTTP
@@ -12,9 +13,11 @@ export const BASE_WEATHER_URL = '';
 
 // Copywriting
 export {
-  cwOnboardingHeadline as onboardingHeadline,
-  cwOnboardingSubheadline as onboardingSubheadline,
-  cwOnboardingLanding as onboardingLanding,
+  cwOnboardingHeadline,
+  cwOnboardingSubheadline,
+  cwOnboardingLanding,
+  cwPersonalization,
+  cwPermissions,
 } from './copywriting';
 
 // Theme

@@ -8,7 +8,7 @@ import {useViewportUnits} from '@hooks';
 
 import styles from './landing.styles';
 import {
-  onboardingLanding,
+  cwOnboardingLanding,
   OnboardingRouters,
 } from '../../../components/configs';
 
@@ -25,17 +25,19 @@ const LandingScreen = () => {
       <Container style={styles(vh).container}>
         <Image style={styles(vh).appLogo} source={Images.appIcon} />
         <Text bold size={TextSize.MD} style={styles(vh).appTitle}>
-          {onboardingLanding.appTitle}
+          {cwOnboardingLanding.appTitle}
         </Text>
         <View style={styles(vh).headlineContainer}>
-          <Text style={styles(vh).headline}>{onboardingLanding.headline}</Text>
+          <Text style={styles(vh).headline}>
+            {cwOnboardingLanding.headline}
+          </Text>
           <Text bold size={TextSize.MD}>
-            {onboardingLanding.subHeadline}
+            {cwOnboardingLanding.subHeadline}
           </Text>
           <Button
             type={ButtonType.PRIMARY}
             style={styles(vh, vw).button}
-            label={onboardingLanding.buttonLabel}
+            label={cwOnboardingLanding.buttonLabel}
             onPress={_navigateToOnboarding}
           />
         </View>

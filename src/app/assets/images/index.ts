@@ -3,4 +3,5 @@ export const Images = {
   stepOne: require('./onboarding/step-1.jpg'),
   stepTwo: require('./onboarding/step-2.jpg'),
   stepThree: require('./onboarding/step-3.jpg'),
+  appleHealthKit: require('./icon/appleHealthKit.png'),
 };

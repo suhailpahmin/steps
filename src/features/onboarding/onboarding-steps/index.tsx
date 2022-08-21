@@ -18,9 +18,9 @@ import styles from './onboardingSteps.styles';
 import {getStep, increment} from '../onboardingSlice';
 
 import {
-  onboardingHeadline,
+  cwOnboardingHeadline,
   OnboardingRouters,
-  onboardingSubheadline,
+  cwOnboardingSubheadline,
 } from '../../../components/configs';
 
 const OnboardingSteps = () => {
@@ -28,8 +28,10 @@ const OnboardingSteps = () => {
   const step = useAppSelector(getStep);
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
-  const [headline, setHeadline] = useState(onboardingHeadline.stepOne);
-  const [subHeadline, setSubheadline] = useState(onboardingSubheadline.stepOne);
+  const [headline, setHeadline] = useState(cwOnboardingHeadline.stepOne);
+  const [subHeadline, setSubheadline] = useState(
+    cwOnboardingSubheadline.stepOne,
+  );
   const [image, setImage] = useState(Images.stepOne);
   const [buttonLabel, setButtonLabel] = useState('Next');
 
@@ -44,20 +46,20 @@ const OnboardingSteps = () => {
   useEffect(() => {
     switch (step) {
       case 1:
-        setHeadline(onboardingHeadline.stepOne);
-        setSubheadline(onboardingSubheadline.stepTwo);
+        setHeadline(cwOnboardingHeadline.stepOne);
+        setSubheadline(cwOnboardingSubheadline.stepTwo);
         setImage(Images.stepOne);
         setButtonLabel('Next');
         break;
       case 2:
-        setHeadline(onboardingHeadline.stepTwo);
-        setSubheadline(onboardingSubheadline.stepTwo);
+        setHeadline(cwOnboardingHeadline.stepTwo);
+        setSubheadline(cwOnboardingSubheadline.stepTwo);
         setImage(Images.stepTwo);
         setButtonLabel('Next');
         break;
       case 3:
-        setHeadline(onboardingHeadline.stepThree);
-        setSubheadline(onboardingSubheadline.stepThree);
+        setHeadline(cwOnboardingHeadline.stepThree);
+        setSubheadline(cwOnboardingSubheadline.stepThree);
         setImage(Images.stepThree);
         setButtonLabel("LET'S GO");
         break;
