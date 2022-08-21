@@ -8,4 +8,7 @@ export const OnboardingRouters = {
 
 export const HomeRouters = {
   home: 'Home',
+  dashboard: 'Dashboard',
+  insight: 'Insight',
+  achievement: 'Achievement',
 };

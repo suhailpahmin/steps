@@ -10,7 +10,7 @@ import {getFirstTime} from './src/app/redux/slices/user';
 import {useAppSelector} from '@hooks';
 
 import {HomeRouters, OnboardingRouters} from './src/components/configs';
-import HomeScreen from './src/features/home/home';
+import HomeScreen from './src/features/home';
 import LandingScreen from './src/features/onboarding/landing';
 import OnboardingSteps from './src/features/onboarding/onboarding-steps';
 import PersonalizationScreen from './src/features/onboarding/personalize';
