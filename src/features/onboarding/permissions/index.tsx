@@ -1,76 +1,41 @@
 import React from 'react';
 import {View} from 'react-native';
-import AppleHealthKit, {
-  HealthInputOptions,
-  HealthValue,
-} from 'react-native-health';
-
-import {appleHealthKitOptions} from '../../../components/configs';
 
 import {Button, ButtonType, Container, SafeArea, Text, TextSize} from '@ui';
-import {useAppDispatch, useViewportUnits} from '@hooks';
+import {useAppDispatch, useAppSelector, useViewportUnits} from '@hooks';
 
 import HealthKitInfo from './healthKitInfo';
-
-import {
-  initHKStepCount,
-  initHKTotalSteps,
-} from '../../../app/providers/healthkit';
 import styles from './permissions.styles';
-import {
-  fetchStepCount,
-  setHealthPermission,
-  setSteps,
-} from 'src/app/redux/slices/fitness';
+
 import {cwButtons} from '../../../components/configs';
 import {cwPermissions} from '../../../components/configs/copywriting';
+import {getHKStepCount} from '../../../app/providers/healthkit';
+import {
+  getHealthPermission,
+  setHealthPermission,
+  setSteps,
+} from '../../../app/redux/slices/fitness';
+import {setFirstTime} from '../../..//app/redux/slices/user';
 
 const SetPermissionsScreen = () => {
   const {vh} = useViewportUnits();
   const dispatch = useAppDispatch();
+  const isHKEnabled = useAppSelector(getHealthPermission);
 
-  // useEffect(() => {
-  //   console.log('Count ', stepCountHK);
-  // });
+  const _onAllow = () => getHKStepCount(_setSteps);
 
-  const _getHKStepCount = () => {
-    AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
-      var response = {
-        allowed: false,
-        steps: 0,
-        error: '',
-      };
+  const _setSteps = (allowed: boolean, steps: number, error: string) => {
+    if (error !== '') {
+      // Display error
+      console.log('[ERROR - Get HealthKit Steps]', error);
+      return;
+    }
 
-      if (error) {
-        response.allowed = false;
-      }
-
-      // HealthKit Initialized. Can now read and write
-      response.allowed = true;
-      dispatch(setHealthPermission(response.allowed));
-
-      const options: HealthInputOptions = {
-        date: new Date().toISOString(),
-        includeManuallyAdded: false,
-      };
-
-      AppleHealthKit.getStepCount(
-        options,
-        (err: Object, results: HealthValue) => {
-          if (err) {
-            //@ts-ignore
-            error = err.message;
-          }
-          response.steps = results.value;
-          dispatch(setSteps(results.value));
-        },
-      );
-    });
+    dispatch(setSteps(steps));
+    dispatch(setHealthPermission(allowed));
   };
 
-  const _onAllow = () => {
-    _getHKStepCount();
-  };
+  const _onComplete = () => dispatch(setFirstTime(false));
 
   return (
     <SafeArea>
@@ -82,11 +47,19 @@ const SetPermissionsScreen = () => {
           <Text style={styles().subtitle}>{cwPermissions.subtitle}</Text>
           <HealthKitInfo />
         </View>
-        <Button
-          type={ButtonType.PRIMARY}
-          label={cwButtons.allow}
-          onPress={_onAllow}
-        />
+        {isHKEnabled ? (
+          <Button
+            type={ButtonType.PRIMARY}
+            label={cwButtons.done}
+            onPress={_onComplete}
+          />
+        ) : (
+          <Button
+            type={ButtonType.PRIMARY}
+            label={cwButtons.allow}
+            onPress={_onAllow}
+          />
+        )}
       </Container>
     </SafeArea>
   );

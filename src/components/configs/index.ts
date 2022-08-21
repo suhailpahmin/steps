@@ -6,6 +6,7 @@ export const MinYear = '1900';
 export const cwButtons = {
   next: 'Next',
   allow: 'Allow',
+  done: 'Done',
 };
 
 // HTTP

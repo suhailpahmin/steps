@@ -5,7 +5,13 @@ import AppleHealthKit, {
 
 import {appleHealthKitOptions} from '../../../components/configs/permissions';
 
-export const initHKStepCount = () => {
+export const getHKStepCount = (
+  setSteps: (allowed: boolean, steps: number, error: string) => void,
+): {
+  allowed: boolean;
+  steps: number;
+  error: string;
+} => {
   var response = {
     allowed: false,
     steps: 0,
@@ -15,6 +21,8 @@ export const initHKStepCount = () => {
   AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
     if (error) {
       response.allowed = false;
+      setSteps(false, 0, 'HealthKit permission rejected');
+      return;
     }
 
     // HealthKit Initialized. Can now read and write
@@ -29,12 +37,17 @@ export const initHKStepCount = () => {
       (err: Object, results: HealthValue) => {
         if (err) {
           //@ts-ignore
-          error = err.message;
+          response.error = err.message;
+          setSteps(response.allowed, 0, err.message);
+          return;
         }
         response.steps = results.value;
+        setSteps(response.allowed, response.steps, response.error);
       },
     );
   });
+
+  return response;
 };
 
 export const initHKTotalSteps = () => {
