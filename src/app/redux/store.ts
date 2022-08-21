@@ -18,6 +18,7 @@ import onboardingReducer from '../../features/onboarding/onboardingSlice';
 import userReducer from './slices/user';
 import fitnessReducer from './slices/fitness';
 import locationReducer from './slices/location';
+import weatherReducer from './slices/weather';
 
 // Persistance Config
 const persistConfig = {
@@ -35,6 +36,7 @@ export const store = configureStore({
     user: _persistedUserReducer,
     fitness: _persistedFitnessReducer,
     location: locationReducer,
+    weather: weatherReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

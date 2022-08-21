@@ -11,7 +11,7 @@ export const cwButtons = {
 };
 
 // HTTP
-export const BASE_WEATHER_URL = '';
+export {apiConfig} from './api';
 
 // Copywriting
 export {

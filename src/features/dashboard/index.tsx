@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {Alert, View, Image} from 'react-native';
 
 import * as Progress from 'react-native-progress';
 import Geolocation from 'react-native-geolocation-service';
@@ -14,32 +14,52 @@ import {
   setHealthPermission,
   setSteps,
 } from '../../app/redux/slices/fitness';
-import {colors} from '../../components/configs';
+import {apiConfig, colors} from '../../components/configs';
 import styles from './dashboard.styles';
 import {getHKStepCount} from '../../app/providers/healthkit';
 import {getLocation} from '../../app/providers/location/location';
 import {getCoords, setCoords} from '../../app/redux/slices/location';
+import {fetchCurrentWeather} from '../../app/providers/api';
+import {
+  getTemperature,
+  getWeather,
+  getWeatherIcon,
+  setWeather,
+} from '../../app/redux/slices/weather';
 
 const DashboardScreen = () => {
   const {today} = useDateHelper();
   const {vh} = useViewportUnits();
   const dispatch = useDispatch();
+
+  // Steps - Apple Health Kit
   const steps = useAppSelector(getSteps);
   const goals = useAppSelector(getGoals);
   const coords = useAppSelector(getCoords);
+
+  // Weather
+  const weather = useAppSelector(getWeather);
+  const weatherIcon = useAppSelector(getWeatherIcon);
+  const temperature = useAppSelector(getTemperature);
 
   useEffect(() => {
     getHKStepCount(_setSteps);
     getLocation(_getCoords);
 
     if (coords.latitude !== 0 && coords.longitude !== 0) {
-      console.log('Coords Updated', coords);
+      _fetchWeather();
     }
   });
 
-  const _getCoords = (location?: Geolocation.GeoPosition | null) => {
-    console.log('Location Retrieved ', location);
+  const _fetchWeather = () => {
+    fetchCurrentWeather(coords.latitude, coords.longitude)
+      .then(response => {
+        dispatch(setWeather(response));
+      })
+      .catch(error => Alert.alert('[ERROR] Fetch Weather', error.message));
+  };
 
+  const _getCoords = (location?: Geolocation.GeoPosition | null) => {
     if (location) {
       const locationCoords = location.coords;
       dispatch(
@@ -53,11 +73,9 @@ const DashboardScreen = () => {
 
   const _setSteps = (allowed: boolean, stepCount: number, error: string) => {
     if (error !== '') {
-      // Display error
-      console.log('[ERROR - Get HealthKit Steps]', error);
+      Alert.alert('[ERROR - Get HealthKit Steps]', error);
       return;
     }
-    console.log('Steps ', stepCount);
     dispatch(setSteps(stepCount));
     dispatch(setHealthPermission(allowed));
   };
@@ -66,11 +84,15 @@ const DashboardScreen = () => {
     <SafeArea>
       <Container style={styles(vh).container}>
         <View style={styles(vh).weatherWrapper}>
+          <Image
+            style={styles(vh).weatherImage}
+            source={{uri: `${apiConfig.weatherIcon}${weatherIcon}.png`}}
+          />
           <Text style={styles(vh).weatherText} size={TextSize.LG} bold>
-            It's cloudy
+            {weather}
           </Text>
           <Text style={styles(vh).temperature} size={TextSize.LG} bold>
-            32°C
+            {temperature}°C
           </Text>
         </View>
         <View style={styles(vh).ringWrapper}>

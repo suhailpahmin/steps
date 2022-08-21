@@ -27,7 +27,7 @@ npx react-native run-ios
 ## Tasks
 
 - [x] Integrate with Apple Health Kit
-- [ ] See the weather of my current location
+- [x] See the weather of my current location
 - [x] Give consent to access to Apple Health
 - [ ] Able to view my past 7 days steps, distance, and hit daily goals
 - [ ] View my steps stats for today
@@ -45,6 +45,6 @@ npx react-native run-ios
 - [x] Application built in React Native & iOS
 - [x] Typescript
 - [x] Redux
-- [ ] Call Weather API via Redux
+- [x] Call Weather API via Redux
 - [ ] Snapshot Testing
 - [x] App works offline

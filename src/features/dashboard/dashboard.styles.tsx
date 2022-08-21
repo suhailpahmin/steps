@@ -21,6 +21,10 @@ const styles = (vh?: number) =>
       alignItems: 'center',
       height: vh ? vh * 25 : 0,
     },
+    weatherImage: {
+      width: vh ? vh * 6 : 0,
+      height: vh ? vh * 6 : 0,
+    },
     weatherText: {
       marginVertical: 16,
     },

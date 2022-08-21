@@ -22,7 +22,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "target": "esnext",
-    "types": ["jest"],
+    "types": ["jest", "node"],
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
