@@ -1,5 +1,5 @@
-import axios from 'axios';
 import {apiConfig} from '../../../components/configs';
+import axios from 'axios';
 
 interface WeatherData {
   description: string;
@@ -11,7 +11,7 @@ export const fetchCurrentWeather = (
   latitude: number,
   longitude: number,
 ): Promise<WeatherData> => {
-  const apiKey = '2c0f578a09475663982d0eeaa712b980'; // TO BE REMOVED
+  const apiKey = '2c0f578a09475663982d0eeaa712b980'; // TO BE REMOVED when getting data from .env is working
   const url = `${apiConfig.currentWeather}${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
   return new Promise((resolve, reject) => {
     axios

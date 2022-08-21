@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 
@@ -18,18 +18,33 @@ import {
 } from '../../../app/redux/slices/fitness';
 import {setFirstTime} from '../../../app/redux/slices/user';
 import {getLocation} from '../../../app/providers/location/location';
+import {getCoords, setCoords} from '../../../app/redux/slices/location';
 
 const SetPermissionsScreen = () => {
   const {vh} = useViewportUnits();
   const dispatch = useAppDispatch();
+  const [allowed, setAllowed] = useState(false);
   const isHKEnabled = useAppSelector(getHealthPermission);
+  const hasLocation = useAppSelector(getCoords);
+
+  useEffect(() => {
+    if (isHKEnabled && hasLocation) {
+      setAllowed(true);
+    }
+  }, [hasLocation, isHKEnabled]);
 
   const _retrievedLocation = (location?: Geolocation.GeoPosition | null) => {
     if (location == null) {
       return;
     }
 
-    console.log('Location', location.coords);
+    const locationCoords = location.coords;
+    dispatch(
+      setCoords({
+        longitude: locationCoords.longitude,
+        latitude: locationCoords.latitude,
+      }),
+    );
   };
 
   const _onAllow = async () => {
@@ -60,7 +75,7 @@ const SetPermissionsScreen = () => {
           <Text style={styles().subtitle}>{cwPermissions.subtitle}</Text>
           <HealthKitInfo />
         </View>
-        {isHKEnabled ? (
+        {allowed ? (
           <Button
             type={ButtonType.PRIMARY}
             label={cwButtons.done}
