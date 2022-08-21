@@ -1,13 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from '../../store';
+import {RootState} from '../store';
 
-const enum Gender {
-  MALE,
-  FEMALE,
-}
 interface UserState {
   firstTime: boolean;
-  gender: Gender;
+  gender: string;
   yearBorn: number;
   weight: number;
   height: number;
@@ -15,7 +11,7 @@ interface UserState {
 
 const initialState: UserState = {
   firstTime: true,
-  gender: Gender.MALE,
+  gender: 'Male',
   yearBorn: 0,
   weight: 0,
   height: 0,
@@ -29,7 +25,14 @@ export const userSlice = createSlice({
       state.firstTime = action.payload;
     },
     setUser(state, action: PayloadAction<UserState>) {
-      state = action.payload;
+      const payload = action.payload;
+      // state = {...action.payload};
+      // state = action.payload; Somehow these two doesnt work. Please explain to me if possible
+      state.firstTime = payload.firstTime;
+      state.gender = payload.gender;
+      state.yearBorn = payload.yearBorn;
+      state.weight = payload.weight;
+      state.height = payload.height;
     },
   },
 });

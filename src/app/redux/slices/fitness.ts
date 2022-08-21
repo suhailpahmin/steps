@@ -1,6 +1,6 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
-import {RootState} from '../../store';
+import {RootState} from '../store';
 
 interface FitnessState {
   goals: number;

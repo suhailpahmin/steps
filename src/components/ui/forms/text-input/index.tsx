@@ -12,6 +12,11 @@ export const TextInput: FC<ITextInputProps> = props => {
         style={styles.input}
         keyboardType={props.keyboardTypes}
         onChangeText={props.onChangeText}
+        defaultValue={props.defaultValue}
+        placeholder={props.placeholder}
+        placeholderTextColor={colors.accent}
+        editable={props.editable}
+        maxLength={props.maxLength}
       />
     </View>
   );
@@ -19,13 +24,15 @@ export const TextInput: FC<ITextInputProps> = props => {
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: 16,
+    borderRadius: 36,
     borderColor: colors.accent,
     borderWidth: 2,
   },
   input: {
+    padding: 16,
     color: colors.text,
-    padding: 24,
+
     textAlign: 'center',
+    letterSpacing: 2.5,
   },
 });

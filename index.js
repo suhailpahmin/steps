@@ -12,7 +12,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 import App from './App';
 import {name as appName} from './app.json';
-import {store, persistor} from './src/app/store';
+import {store, persistor} from './src/app/redux/store';
 
 AppRegistry.registerComponent(appName, () => () => (
   <Provider store={store}>

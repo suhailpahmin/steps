@@ -1,5 +1,7 @@
 #import "AppDelegate.h"
 
+#import "RCTAppleHealthKit.h"
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -35,6 +37,9 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 
+  /* Add Background initializer for HealthKit  */
+  [[RCTAppleHealthKit new] initializeBackgroundObservers:bridge];
+  
 #if RCT_NEW_ARCH_ENABLED
   _contextContainer = std::make_shared<facebook::react::ContextContainer const>();
   _reactNativeConfig = std::make_shared<facebook::react::EmptyReactNativeConfig const>();

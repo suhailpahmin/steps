@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {RootState} from 'src/app/store';
+import {RootState} from 'src/app/redux/store';
 
 interface OnboardingState {
   step: number;

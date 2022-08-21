@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 'bold',
     fontSize: 16,
+    letterSpacing: 2.5,
 
     paddingVertical: 16,
     color: colors.text,

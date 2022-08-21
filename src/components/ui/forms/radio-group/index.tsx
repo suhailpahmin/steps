@@ -35,15 +35,15 @@ const styles = (selected?: boolean) =>
   StyleSheet.create({
     base: {
       flexDirection: 'row',
-      justifyContent: 'space-evenly',
     },
     radio: {
-      backgroundColor: selected ? colors.accent : colors.background,
+      backgroundColor: selected ? colors.overlay : colors.background,
 
       paddingHorizontal: 24,
       paddingVertical: 16,
+      marginEnd: 24,
 
-      borderRadius: 16,
+      borderRadius: 36,
       borderColor: colors.accent,
       borderWidth: 2,
     },

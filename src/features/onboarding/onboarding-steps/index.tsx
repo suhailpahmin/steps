@@ -16,10 +16,10 @@ import {useAppDispatch, useAppSelector, useViewportUnits} from '@hooks';
 
 import styles from './onboardingSteps.styles';
 import {getStep, increment} from '../onboardingSlice';
-import {setFirstTime} from '../../../app/redux/slices/user';
 
 import {
   onboardingHeadline,
+  OnboardingRouters,
   onboardingSubheadline,
 } from '../../../components/configs';
 
@@ -37,8 +37,7 @@ const OnboardingSteps = () => {
     if (step !== 3) {
       dispatch(increment());
     } else {
-      dispatch(setFirstTime(false));
-      navigation.navigate('Home');
+      navigation.navigate(OnboardingRouters.personalize);
     }
   };
 

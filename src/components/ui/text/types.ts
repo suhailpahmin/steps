@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {StyleProp, ViewStyle} from 'react-native';
+import {StyleProp, TextStyle} from 'react-native';
 
 export enum TextSize {
   SM,
@@ -10,6 +10,6 @@ export enum TextSize {
 export interface ITextProps {
   size?: TextSize;
   bold?: boolean;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
   children: ReactNode;
 }

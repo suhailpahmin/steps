@@ -17,11 +17,11 @@ const styles = (size?: TextSize, bold?: boolean) =>
       color: colors.text,
       fontSize:
         size === TextSize.SM
-          ? 16
+          ? 12
           : size === TextSize.MD
-          ? 24
+          ? 16
           : size === TextSize.LG
-          ? 36
+          ? 24
           : 8,
       fontWeight: bold ? 'bold' : '300',
       letterSpacing: 3.0,

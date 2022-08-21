@@ -14,9 +14,9 @@ import {
 } from 'redux-persist';
 
 // Reducers
-import onboardingReducer from '../features/onboarding/onboardingSlice';
-import userReducer from './redux/slices/user';
-import fitnessReducer from './redux/slices/fitness';
+import onboardingReducer from '../../features/onboarding/onboardingSlice';
+import userReducer from './slices/user';
+import fitnessReducer from './slices/fitness';
 
 // Persistance Config
 const persistConfig = {
