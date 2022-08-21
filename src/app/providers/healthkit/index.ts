@@ -1,9 +1,35 @@
 import AppleHealthKit, {
   HealthInputOptions,
+  HealthObserver,
   HealthValue,
 } from 'react-native-health';
 
+import {NativeAppEventEmitter} from 'react-native';
 import {appleHealthKitOptions} from '../../../components/configs/permissions';
+
+export const getWalkingSamples = (firstDate: string, lastDate: string) => {
+  const options = {
+    startDate: firstDate,
+    lastDate: lastDate,
+    type: HealthObserver.Walking,
+  };
+
+  AppleHealthKit.getSamples(options, (err: Object, results: Array<Object>) => {
+    if (err) {
+      return;
+    }
+    console.log('Walking Samples', results);
+  });
+};
+
+export const initHKListener = (setSteps: () => void) =>
+  NativeAppEventEmitter.addListener(
+    'healthKit:StepCount:setup:success',
+    setSteps,
+  );
+
+export const updateHKSteps = (setSteps: () => void) =>
+  NativeAppEventEmitter.addListener('healthKit:StepCount:new', setSteps);
 
 export const getHKStepCount = (
   setSteps: (allowed: boolean, steps: number, error: string) => void,
@@ -27,6 +53,7 @@ export const getHKStepCount = (
 
     // HealthKit Initialized. Can now read and write
     response.allowed = true;
+
     const options: HealthInputOptions = {
       date: new Date().toISOString(),
       includeManuallyAdded: false,
@@ -75,7 +102,6 @@ export const initHKTotalSteps = () => {
         if (err) {
           return;
         }
-        console.log('Daily Step Count Results', results);
         return results;
       },
     );

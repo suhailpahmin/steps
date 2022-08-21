@@ -1,25 +1,50 @@
+import {HomeRouters, OnboardingRouters} from './src/components/configs';
 /**
  * @format
  */
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useEffect} from 'react';
+import {
+  getWalkingSamples,
+  initHKListener,
+  updateHKSteps,
+} from './src/app/providers/healthkit';
 
-// Persistance Storage
-import {getFirstTime} from './src/app/redux/slices/user';
-import {useAppSelector} from '@hooks';
-
-import {HomeRouters, OnboardingRouters} from './src/components/configs';
 import HomeScreen from './src/features/home';
 import LandingScreen from './src/features/onboarding/landing';
+import {NavigationContainer} from '@react-navigation/native';
 import OnboardingSteps from './src/features/onboarding/onboarding-steps';
 import PersonalizationScreen from './src/features/onboarding/personalize';
 import SetPermissionsScreen from './src/features/onboarding/permissions';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {getFirstTime} from './src/app/redux/slices/user';
+// Persistance Storage
+import {useAppSelector, useDateHelper} from '@hooks';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   const firstTime = useAppSelector(getFirstTime);
+
+  const newStep = (): void => {
+    console.log('NewStep Callback');
+    const {firstDate, lastDate} = useDateHelper();
+    getWalkingSamples(firstDate, lastDate);
+  };
+
+  const stepUpdate = (): void => {
+    console.log('StepUpdate Callback');
+    const {firstDate, lastDate} = useDateHelper();
+    getWalkingSamples(firstDate, lastDate);
+  };
+
+  const _startListeningHK = () => {
+    initHKListener(newStep);
+    updateHKSteps(stepUpdate);
+  };
+
+  useEffect(() => {
+    _startListeningHK();
+  });
 
   return (
     <NavigationContainer>

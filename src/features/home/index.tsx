@@ -4,7 +4,7 @@ import VectorImage from 'react-native-vector-image';
 
 import {Images} from '@assets';
 
-import {HomeRouters} from '../../components/configs';
+import {colors, HomeRouters} from '../../components/configs';
 import DashboardScreen from '../dashboard';
 import InsightScreen from '../insight';
 import AchievementScreen from '../achievement';
@@ -34,8 +34,20 @@ const HomeScreen = () => {
 
           return <VectorImage source={iconName} />;
         },
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: colors.overlay,
+        },
+        tabBarShowLabel: false,
       })}>
-      <Tab.Screen name={HomeRouters.dashboard} component={DashboardScreen} />
+      <Tab.Screen
+        name={HomeRouters.dashboard}
+        component={DashboardScreen}
+        options={{unmountOnBlur: true}} // Reset dashboard to retrieve new steps
+        listeners={({navigation}) => ({
+          blur: () => navigation.setParams({screen: undefined}),
+        })}
+      />
       <Tab.Screen name={HomeRouters.insight} component={InsightScreen} />
       <Tab.Screen
         name={HomeRouters.achievement}

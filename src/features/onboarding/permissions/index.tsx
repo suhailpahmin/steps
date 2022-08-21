@@ -15,7 +15,7 @@ import {
   setHealthPermission,
   setSteps,
 } from '../../../app/redux/slices/fitness';
-import {setFirstTime} from '../../..//app/redux/slices/user';
+import {setFirstTime} from '../../../app/redux/slices/user';
 
 const SetPermissionsScreen = () => {
   const {vh} = useViewportUnits();
