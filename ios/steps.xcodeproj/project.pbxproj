@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B61B8EBF28B29AD5008A22AD /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B8EBE28B29AD5008A22AD /* dummy.swift */; };
 		B696439F28B13C80002A0A3F /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B696439E28B13C80002A0A3F /* HealthKit.framework */; };
 		E9D3EA32F8E2820552D14961 /* libPods-steps-stepsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EB93D4F3C4109DD363B2EE0 /* libPods-steps-stepsTests.a */; };
 		F49CB8471AF64D88ABCB06D8 /* libPods-steps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B7FA58346C80A4EB0F4ABB /* libPods-steps.a */; };
@@ -42,6 +43,8 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = steps/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEC592A6703EEDA7AFDF0157 /* Pods-steps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-steps.debug.xcconfig"; path = "Target Support Files/Pods-steps/Pods-steps.debug.xcconfig"; sourceTree = "<group>"; };
 		B0C203C2FC29B6D29850A441 /* Pods-steps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-steps.release.xcconfig"; path = "Target Support Files/Pods-steps/Pods-steps.release.xcconfig"; sourceTree = "<group>"; };
+		B61B8EBD28B29AD5008A22AD /* steps-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "steps-Bridging-Header.h"; sourceTree = "<group>"; };
+		B61B8EBE28B29AD5008A22AD /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		B696439D28B13C80002A0A3F /* steps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = steps.entitlements; path = steps/steps.entitlements; sourceTree = "<group>"; };
 		B696439E28B13C80002A0A3F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B6CE85AA28B240BA008EDBC1 /* stepsDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = stepsDebug.entitlements; path = steps/stepsDebug.entitlements; sourceTree = "<group>"; };
@@ -124,12 +127,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B61B8EBE28B29AD5008A22AD /* dummy.swift */,
 				13B07FAE1A68108700A75B9A /* steps */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* stepsTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				B61B8EBD28B29AD5008A22AD /* steps-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -215,7 +220,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -421,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				B61B8EBF28B29AD5008A22AD /* dummy.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FADF51B65FF7BE447E1241D8 /* Pods-steps-stepsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -467,6 +474,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C19D30976BE3584C85466BD4 /* Pods-steps-stepsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = stepsTests/Info.plist;
@@ -512,6 +520,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.suhailpahmin.steps;
 				PRODUCT_NAME = steps;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "steps-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -539,6 +548,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.suhailpahmin.steps;
 				PRODUCT_NAME = steps;
+				SWIFT_OBJC_BRIDGING_HEADER = "steps-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

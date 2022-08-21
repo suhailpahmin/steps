@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {View} from 'react-native';
 
 import * as Progress from 'react-native-progress';
+import Geolocation from 'react-native-geolocation-service';
 import {useDispatch} from 'react-redux';
 
 import {useAppSelector, useDateHelper, useViewportUnits} from '@hooks';
@@ -16,6 +17,8 @@ import {
 import {colors} from '../../components/configs';
 import styles from './dashboard.styles';
 import {getHKStepCount} from '../../app/providers/healthkit';
+import {getLocation} from '../../app/providers/location/location';
+import {getCoords, setCoords} from '../../app/redux/slices/location';
 
 const DashboardScreen = () => {
   const {today} = useDateHelper();
@@ -23,10 +26,30 @@ const DashboardScreen = () => {
   const dispatch = useDispatch();
   const steps = useAppSelector(getSteps);
   const goals = useAppSelector(getGoals);
+  const coords = useAppSelector(getCoords);
 
   useEffect(() => {
     getHKStepCount(_setSteps);
+    getLocation(_getCoords);
+
+    if (coords.latitude !== 0 && coords.longitude !== 0) {
+      console.log('Coords Updated', coords);
+    }
   });
+
+  const _getCoords = (location?: Geolocation.GeoPosition | null) => {
+    console.log('Location Retrieved ', location);
+
+    if (location) {
+      const locationCoords = location.coords;
+      dispatch(
+        setCoords({
+          longitude: locationCoords.longitude,
+          latitude: locationCoords.latitude,
+        }),
+      );
+    }
+  };
 
   const _setSteps = (allowed: boolean, stepCount: number, error: string) => {
     if (error !== '') {
