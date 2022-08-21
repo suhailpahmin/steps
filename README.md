@@ -38,7 +38,7 @@ npx react-native run-ios
 - [x] Onboarding Screen
 - [x] Main Screen
 - [ ] Step History Screen
-- [ ] Weather
+- [x] Weather
 
 ## Tech Requirement
 
