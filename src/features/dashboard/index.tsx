@@ -42,27 +42,37 @@ const DashboardScreen = () => {
   return (
     <SafeArea>
       <Container style={styles(vh).container}>
-        <View style={styles(vh).innerRingContainer}>
-          <Text bold size={TextSize.MD}>
-            {today}
+        <View style={styles(vh).weatherWrapper}>
+          <Text style={styles(vh).weatherText} size={TextSize.LG} bold>
+            It's cloudy
           </Text>
-          <Text bold style={styles().steps}>
-            {steps}
-          </Text>
-          <Text bold size={TextSize.MD}>
-            Steps Goal : {goals}
+          <Text style={styles(vh).temperature} size={TextSize.LG} bold>
+            32°C
           </Text>
         </View>
-        <Progress.Circle
-          style={styles().progress}
-          progress={0.3}
-          size={vh * 40}
-          indeterminate={false}
-          color={colors.primary}
-          unfilledColor={colors.secondary}
-          animated
-          strokeCap="round"
-        />
+        <View style={styles(vh).ringWrapper}>
+          <View style={styles(vh).innerRingContainer}>
+            <Text bold size={TextSize.MD}>
+              {today}
+            </Text>
+            <Text bold style={styles().steps}>
+              {steps}
+            </Text>
+            <Text bold size={TextSize.MD}>
+              Steps Goal : {goals}
+            </Text>
+          </View>
+          <Progress.Circle
+            style={styles().progress}
+            progress={0.3}
+            size={vh * 40}
+            indeterminate={false}
+            color={colors.primary}
+            unfilledColor={colors.secondary}
+            animated
+            strokeCap="round"
+          />
+        </View>
       </Container>
     </SafeArea>
   );

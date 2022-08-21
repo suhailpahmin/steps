@@ -1,6 +1,7 @@
 // General
 export const Genders = ['Male', 'Female'];
 export const MinYear = '1900';
+export const AppName = 'Steps';
 
 // Buttons
 export const cwButtons = {

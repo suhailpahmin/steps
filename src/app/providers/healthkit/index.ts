@@ -64,7 +64,6 @@ export const getHKStepCount = (
       (err: Object, results: HealthValue) => {
         if (err) {
           //@ts-ignore
-          response.error = err.message;
           setSteps(response.allowed, 0, err.message);
           return;
         }

@@ -26,13 +26,11 @@ const App = () => {
   const firstTime = useAppSelector(getFirstTime);
 
   const newStep = (): void => {
-    console.log('NewStep Callback');
     const {firstDate, lastDate} = useDateHelper();
     getWalkingSamples(firstDate, lastDate);
   };
 
   const stepUpdate = (): void => {
-    console.log('StepUpdate Callback');
     const {firstDate, lastDate} = useDateHelper();
     getWalkingSamples(firstDate, lastDate);
   };

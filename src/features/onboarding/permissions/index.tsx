@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import Geolocation from 'react-native-geolocation-service';
 
 import {Button, ButtonType, Container, SafeArea, Text, TextSize} from '@ui';
 import {useAppDispatch, useAppSelector, useViewportUnits} from '@hooks';
@@ -16,13 +17,25 @@ import {
   setSteps,
 } from '../../../app/redux/slices/fitness';
 import {setFirstTime} from '../../../app/redux/slices/user';
+import {getLocation} from '../../../app/providers/location/location';
 
 const SetPermissionsScreen = () => {
   const {vh} = useViewportUnits();
   const dispatch = useAppDispatch();
   const isHKEnabled = useAppSelector(getHealthPermission);
 
-  const _onAllow = () => getHKStepCount(_setSteps);
+  const _retrievedLocation = (location?: Geolocation.GeoPosition | null) => {
+    if (location == null) {
+      return;
+    }
+
+    console.log('Location', location.coords);
+  };
+
+  const _onAllow = async () => {
+    getHKStepCount(_setSteps);
+    await getLocation(_retrievedLocation);
+  };
 
   const _setSteps = (allowed: boolean, steps: number, error: string) => {
     if (error !== '') {
