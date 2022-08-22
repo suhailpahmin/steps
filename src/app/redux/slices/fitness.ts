@@ -23,34 +23,19 @@ export const fitnessSlice = createSlice({
   initialState,
   reducers: {
     setGoals(state, action: PayloadAction<number>) {
-      return {
-        ...state,
-        goals: action.payload,
-      };
+      state.goals = action.payload;
     },
     setSteps(state, action: PayloadAction<number>) {
-      return {
-        ...state,
-        steps: action.payload,
-      };
+      state.steps = action.payload;
     },
     setHealthPermission(state, action: PayloadAction<boolean>) {
-      return {
-        ...state,
-        allowed: action.payload,
-      };
+      state.allowed = action.payload;
     },
     setStepProgress(state, action: PayloadAction<number>) {
-      return {
-        ...state,
-        progress: action.payload,
-      };
+      state.progress = action.payload;
     },
     setDistance(state, action: PayloadAction<number>) {
-      return {
-        ...state,
-        distance: action.payload,
-      };
+      state.distance = action.payload;
     },
   },
 });
