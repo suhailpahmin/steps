@@ -3,7 +3,6 @@ import AppleHealthKit, {
   HealthObserver,
   HealthValue,
 } from 'react-native-health';
-
 import {NativeAppEventEmitter} from 'react-native';
 import {appleHealthKitOptions} from '../../../components/configs/permissions';
 
@@ -31,6 +30,7 @@ export const initHKListener = (setSteps: () => void) =>
 export const updateHKSteps = (setSteps: () => void) =>
   NativeAppEventEmitter.addListener('healthKit:StepCount:new', setSteps);
 
+// Get today's step
 export const getHKStepCount = (
   setSteps: (allowed: boolean, steps: number, error: string) => void,
 ): {
@@ -76,7 +76,8 @@ export const getHKStepCount = (
   return response;
 };
 
-export const initHKTotalSteps = () => {
+// Get weekly step
+export const getHKTotalSteps = () => {
   AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
     if (error) {
       console.log('[ERROR] Cannot grant permission');
@@ -101,6 +102,60 @@ export const initHKTotalSteps = () => {
         if (err) {
           return;
         }
+        console.log('Daily Steps Count', results);
+        return results;
+      },
+    );
+  });
+};
+
+// Get distance
+export const getHKDistance = () => {
+  AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
+    if (error) {
+      console.log('[ERROR] Cannot grant permission');
+    }
+
+    // HealthKit Initialized. Can now read and write
+    const options: HealthInputOptions = {
+      startDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
+      type: 'Walking' as HealthObserver,
+    };
+
+    AppleHealthKit.getSamples(
+      options,
+      (err: Object, results: Array<Object>) => {
+        if (err) {
+          return;
+        }
+        console.log('Current Distance ', results);
+        return results;
+      },
+    );
+  });
+};
+
+// Get calories
+export const getHKCaloriesBurned = () => {
+  AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
+    if (error) {
+      console.log('[ERROR] Cannot grant permission');
+    }
+
+    // HealthKit Initialized. Can now read and write
+    const options: HealthInputOptions = {
+      startDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
+    };
+
+    AppleHealthKit.getActiveEnergyBurned(
+      options,
+      (err: Object, results: HealthValue[]) => {
+        if (err) {
+          return;
+        }
+        console.log('Calories Burned ', results);
         return results;
       },
     );

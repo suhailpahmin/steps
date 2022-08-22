@@ -6,7 +6,7 @@ import {Images} from '@assets';
 
 import {colors, HomeRouters} from '../../components/configs';
 import DashboardScreen from '../dashboard';
-import InsightScreen from '../insight';
+import InsightScreen from '../insights';
 import AchievementScreen from '../achievement';
 
 const Tab = createBottomTabNavigator();

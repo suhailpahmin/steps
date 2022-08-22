@@ -1,24 +1,24 @@
-import {HomeRouters, OnboardingRouters} from './src/components/configs';
 /**
  * @format
  */
 import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import {useAppSelector, useDateHelper} from '@hooks';
+
 import {
   getWalkingSamples,
   initHKListener,
   updateHKSteps,
 } from './src/app/providers/healthkit';
-
 import HomeScreen from './src/features/home';
 import LandingScreen from './src/features/onboarding/landing';
-import {NavigationContainer} from '@react-navigation/native';
 import OnboardingSteps from './src/features/onboarding/onboarding-steps';
 import PersonalizationScreen from './src/features/onboarding/personalize';
 import SetPermissionsScreen from './src/features/onboarding/permissions';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {HomeRouters, OnboardingRouters} from './src/components/configs';
 import {getFirstTime} from './src/app/redux/slices/user';
-// Persistance Storage
-import {useAppSelector, useDateHelper} from '@hooks';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +32,7 @@ const App = () => {
 
   const stepUpdate = (): void => {
     const {firstDate, lastDate} = useDateHelper();
+    console.log('Walking Steps');
     getWalkingSamples(firstDate, lastDate);
   };
 

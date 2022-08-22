@@ -41,12 +41,13 @@ export const useDateHelper = () => {
   const _getCurrentMonth = (month: number): string => months[month];
 
   const currentMonth = _getCurrentMonth(currentDate.getMonth());
-  const today =
-    currentDate.getDate() +
-    ' ' +
-    currentMonth +
-    ' ' +
-    currentDate.getFullYear();
 
-  return {today, firstDate, lastDate};
+  const weekRange = `${firstDate.substring(8, 10)} - ${lastDate.substring(
+    8,
+    10,
+  )} ${currentMonth}`;
+
+  const today = `${currentDate.getDate()} ${currentMonth} ${currentDate.getFullYear()}`;
+
+  return {today, firstDate, lastDate, weekRange};
 };

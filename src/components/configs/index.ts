@@ -20,6 +20,8 @@ export {
   cwOnboardingLanding,
   cwPersonalization,
   cwPermissions,
+  cwInsights,
+  cwAchievements,
 } from './copywriting';
 
 // Theme

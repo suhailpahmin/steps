@@ -35,3 +35,18 @@ export const cwPermissions = {
   fitnessPermission: 'Please allow us to track your fitness',
   locationPermission: 'Please allow us to track your location',
 };
+
+export const cwInsights = {
+  title: 'Stats',
+  thisWeek: 'This week',
+  steps: 'Steps',
+  calories: 'Calories',
+};
+
+export const cwAchievements = {
+  title: 'Achievements',
+  totalSteps: 'Total Steps',
+  averageDaily: 'Average Daily Steps',
+  caloriesBurned: 'Calories Burned',
+  distanceTravelled: 'Distance Travelled',
+};

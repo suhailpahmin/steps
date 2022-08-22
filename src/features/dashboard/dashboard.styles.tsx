@@ -8,7 +8,12 @@ const styles = (vh?: number) =>
     steps: {
       fontSize: 48,
       letterSpacing: 8,
-      marginVertical: 36,
+      marginTop: 36,
+      marginBottom: 24,
+    },
+    distance: {
+      fontSize: 14,
+      marginBottom: 16,
     },
     weatherWrapper: {
       position: 'absolute',

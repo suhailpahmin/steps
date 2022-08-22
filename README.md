@@ -16,6 +16,7 @@ npx react-native run-ios
 ### Reference
 
 Download react-native-health folder [here](https://drive.google.com/file/d/1GUr0t_yeQvQJsdLgFdcbHW0gvyWJP6dG/view?usp=sharing)
+
 ## Major Libraries
 
 - React Redux & @ReduxJs/Toolkit (State Management)
@@ -32,15 +33,15 @@ Download react-native-health folder [here](https://drive.google.com/file/d/1GUr0
 - [x] Integrate with Apple Health Kit
 - [x] See the weather of my current location
 - [x] Give consent to access to Apple Health
-- [ ] Able to view my past 7 days steps, distance, and hit daily goals
-- [ ] View my steps stats for today
+- [x] Able to view my past 7 days steps, distance, and hit daily goals
+- [x] View my steps stats for today
 - [x] Set walking goals
 
 ## Sitemap
 
 - [x] Onboarding Screen
 - [x] Main Screen
-- [ ] Step History Screen
+- [x] Step History Screen
 - [x] Weather
 
 ## Tech Requirement

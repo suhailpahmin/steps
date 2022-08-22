@@ -11,12 +11,16 @@ import {Container, SafeArea, Text, TextSize} from '@ui';
 import {
   getGoals,
   getSteps,
+  getStepProgress,
   setHealthPermission,
+  setStepProgress,
   setSteps,
+  setDistance,
+  getDistance,
 } from '../../app/redux/slices/fitness';
 import {apiConfig, colors} from '../../components/configs';
 import styles from './dashboard.styles';
-import {getHKStepCount} from '../../app/providers/healthkit';
+import {getHKDistance, getHKStepCount} from '../../app/providers/healthkit';
 import {getLocation} from '../../app/providers/location/location';
 import {getCoords, setCoords} from '../../app/redux/slices/location';
 import {fetchCurrentWeather} from '../../app/providers/api';
@@ -36,6 +40,8 @@ const DashboardScreen = () => {
   const steps = useAppSelector(getSteps);
   const goals = useAppSelector(getGoals);
   const coords = useAppSelector(getCoords);
+  const stepsProgress = useAppSelector(getStepProgress);
+  const distance = useAppSelector(getDistance);
 
   // Weather
   const weather = useAppSelector(getWeather);
@@ -45,6 +51,7 @@ const DashboardScreen = () => {
   useEffect(() => {
     getHKStepCount(_setSteps);
     getLocation(_getCoords);
+    getHKDistance(_getDistance);
 
     if (coords.latitude !== 0 && coords.longitude !== 0) {
       _fetchWeather();
@@ -71,11 +78,20 @@ const DashboardScreen = () => {
     }
   };
 
+  const _getDistance = (distance?: number) => {
+    if (distance) {
+      dispatch(setDistance(distance));
+    }
+  };
+
   const _setSteps = (allowed: boolean, stepCount: number, error: string) => {
     if (error !== '') {
       Alert.alert('[ERROR - Get HealthKit Steps]', error);
       return;
     }
+
+    const stepProgress = stepCount / goals;
+    dispatch(setStepProgress(stepProgress));
     dispatch(setSteps(stepCount));
     dispatch(setHealthPermission(allowed));
   };
@@ -103,13 +119,16 @@ const DashboardScreen = () => {
             <Text bold style={styles().steps}>
               {steps}
             </Text>
+            <Text bold style={styles().distance}>
+              Distance : {distance} miles
+            </Text>
             <Text bold size={TextSize.MD}>
               Steps Goal : {goals}
             </Text>
           </View>
           <Progress.Circle
             style={styles().progress}
-            progress={0.3}
+            progress={stepsProgress}
             size={vh * 40}
             indeterminate={false}
             color={colors.primary}
