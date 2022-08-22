@@ -52,7 +52,7 @@ const SetPermissionsScreen = () => {
     await getLocation(_retrievedLocation);
   };
 
-  const _setSteps = (allowed: boolean, steps: number, error: string) => {
+  const _setSteps = (isAllowed: boolean, steps: number, error: string) => {
     if (error !== '') {
       // Display error
       console.log('[ERROR - Get HealthKit Steps]', error);
@@ -60,7 +60,7 @@ const SetPermissionsScreen = () => {
     }
 
     dispatch(setSteps(steps));
-    dispatch(setHealthPermission(allowed));
+    dispatch(setHealthPermission(isAllowed));
   };
 
   const _onComplete = () => dispatch(setFirstTime(false));
