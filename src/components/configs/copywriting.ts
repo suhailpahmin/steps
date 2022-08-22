@@ -32,5 +32,6 @@ export const cwPermissions = {
   title: 'Permission...please?',
   subtitle:
     'By giving us permission, we can keep track of your fitness activity to provide your the best experience!',
-  permission: 'Please allow us to track your fitness',
+  fitnessPermission: 'Please allow us to track your fitness',
+  locationPermission: 'Please allow us to track your location',
 };

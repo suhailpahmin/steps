@@ -6,7 +6,7 @@ Steps is a fitness mobile application that tracks your step counts. Stay updated
 
 ```
 git clone https://github.com/suhailpahmin/steps.git
-npm install (Note: Update react-native-health folder to avoid applicatiom from crashing)
+npm install (Note: Update react-native-health folder inside node_modules to avoid applicatiom from crashing)
 cd ios
 pod install
 cd ..

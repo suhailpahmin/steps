@@ -1,24 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
-
 import {Button, ButtonType, Container, SafeArea, Text, TextSize} from '@ui';
-import {useAppDispatch, useAppSelector, useViewportUnits} from '@hooks';
-
-import HealthKitInfo from './healthKitInfo';
-import styles from './permissions.styles';
-
-import {cwButtons} from '../../../components/configs';
-import {cwPermissions} from '../../../components/configs/copywriting';
-import {getHKStepCount} from '../../../app/providers/healthkit';
+import PermissionInfo, {Permission} from './permissionInfo';
+import React, {useEffect, useState} from 'react';
+import {getCoords, setCoords} from '../../../app/redux/slices/location';
 import {
   getHealthPermission,
   setHealthPermission,
   setSteps,
 } from '../../../app/redux/slices/fitness';
-import {setFirstTime} from '../../../app/redux/slices/user';
+import {useAppDispatch, useAppSelector, useViewportUnits} from '@hooks';
+
+import Geolocation from 'react-native-geolocation-service';
+import {View} from 'react-native';
+import {cwButtons} from '../../../components/configs';
+import {cwPermissions} from '../../../components/configs/copywriting';
+import {getHKStepCount} from '../../../app/providers/healthkit';
 import {getLocation} from '../../../app/providers/location/location';
-import {getCoords, setCoords} from '../../../app/redux/slices/location';
+import {setFirstTime} from '../../../app/redux/slices/user';
+import styles from './permissions.styles';
 
 const SetPermissionsScreen = () => {
   const {vh} = useViewportUnits();
@@ -73,7 +71,8 @@ const SetPermissionsScreen = () => {
             {cwPermissions.title}
           </Text>
           <Text style={styles().subtitle}>{cwPermissions.subtitle}</Text>
-          <HealthKitInfo />
+          <PermissionInfo permission={Permission.HEALTH_KIT} />
+          <PermissionInfo permission={Permission.LOCATION} />
         </View>
         {allowed ? (
           <Button

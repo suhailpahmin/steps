@@ -4,6 +4,7 @@ export const Images = {
   stepTwo: require('./onboarding/step-2.jpg'),
   stepThree: require('./onboarding/step-3.jpg'),
   appleHealthKit: require('./icon/appleHealthKit.png'),
+  location: require('./icon/location.png'),
   dashboard: require('./icon/dashboard.svg'),
   inactiveDashboard: require('./icon/inactive-dashboard.svg'),
   insights: require('./icon/insights.svg'),

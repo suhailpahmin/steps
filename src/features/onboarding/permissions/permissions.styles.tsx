@@ -33,6 +33,12 @@ const styles = (vh?: number) =>
       justifyContent: 'space-around',
       alignItems: 'center',
     },
+    locationImage: {
+      marginEnd: 16,
+      resizeMode: 'contain',
+      width: 28,
+      height: 28,
+    },
     logoWrapper: {
       flexDirection: 'row',
       alignItems: 'center',
