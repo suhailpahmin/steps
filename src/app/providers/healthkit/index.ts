@@ -110,7 +110,7 @@ export const getHKTotalSteps = () => {
 };
 
 // Get distance
-export const getHKDistance = () => {
+export const getHKDistance = (callback: (result: Object[]) => void) => {
   AppleHealthKit.initHealthKit(appleHealthKitOptions, (error: string) => {
     if (error) {
       console.log('[ERROR] Cannot grant permission');
@@ -130,7 +130,7 @@ export const getHKDistance = () => {
           return;
         }
         console.log('Current Distance ', results);
-        return results;
+        callback(results);
       },
     );
   });

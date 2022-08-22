@@ -15,7 +15,6 @@ import {
   setHealthPermission,
   setStepProgress,
   setSteps,
-  setDistance,
   getDistance,
 } from '../../app/redux/slices/fitness';
 import {apiConfig, colors} from '../../components/configs';
@@ -78,10 +77,9 @@ const DashboardScreen = () => {
     }
   };
 
-  const _getDistance = (distance?: number) => {
-    if (distance) {
-      dispatch(setDistance(distance));
-    }
+  const _getDistance = (result: Object[]) => {
+    console.log('Distance ', result);
+    // I cant get result from simulator.
   };
 
   const _setSteps = (allowed: boolean, stepCount: number, error: string) => {
