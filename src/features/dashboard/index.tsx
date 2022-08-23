@@ -88,8 +88,10 @@ const DashboardScreen = () => {
       return;
     }
 
-    const stepProgress = stepCount / goals;
-    dispatch(setStepProgress(stepProgress));
+    if (goals !== 0) {
+      const stepProgress = stepCount / goals;
+      dispatch(setStepProgress(stepProgress));
+    }
     dispatch(setSteps(stepCount));
     dispatch(setHealthPermission(allowed));
   };
